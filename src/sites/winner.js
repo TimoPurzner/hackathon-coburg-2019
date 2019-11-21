@@ -16,7 +16,7 @@ class Winner extends Component {
                             />
                         </div>
                         <div className={'flip-card__back'}>
-                            <img src="/images/win_lose.jpg"
+                            <img src="/images/win_lose.png"
                                  alt="Koenige der memes"
                             />
                         </div>
