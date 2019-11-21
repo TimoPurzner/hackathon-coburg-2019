@@ -14,6 +14,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path='/' component={Winner}/>
+        <Route exact path='/winner' component={Winner}/>
       </Switch>
     </Router>
   );
