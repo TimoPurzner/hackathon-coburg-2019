@@ -13,8 +13,8 @@ class Login extends Component {
     return (
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as='h2' color='orange' textAlign='center'>
-              <Image src='/images/logo.svg'/>Log-in to your account
+            <Header className={'login__header'} as='h2' color='orange' textAlign='center'>
+              <Image src='/images/logo.svg'/><span>Log-in to your account</span>
             </Header>
             <Form size='large'>
               <Segment stacked>
