@@ -1,0 +1,10 @@
+.header{
+    display: flex;
+    border-bottom: 1px solid #333333;
+    margin-left: 10px;
+}
+.header__name{
+    margin-left: 30%;
+    align-self: center;
+    justify-self: center;
+}

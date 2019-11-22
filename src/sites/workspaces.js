@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import { Header } from 'semantic-ui-react'
+import Head from '../component/header'
 import Api from '../api/api'
 
-class ParkingSlots extends Component {
+class Workspaces extends Component {
 
   constructor(props) {
     super(props);
@@ -9,7 +11,6 @@ class ParkingSlots extends Component {
       svg: "",
     };
     this.api=Api.getInstance();
-
 
 
 
@@ -21,13 +22,12 @@ class ParkingSlots extends Component {
   render() {
     return (
         <div className=''>
-          <h1>string:team</h1>
+          <Head />
 
-          {this.state.svg}
 
         </div>
     )
   }
 }
 
-export default ParkingSlots;
+export default Workspaces;
