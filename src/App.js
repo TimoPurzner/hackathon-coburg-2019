@@ -12,6 +12,7 @@ import Index from './sites/index'
 import Workspaces from './sites/workspaces'
 import UserSearch from './sites/user_search'
 import Navigation from './sites/navigation'
+import S404 from './sites/s404'
 import Api from './api/api'
 
 new Api();
@@ -26,6 +27,7 @@ function App() {
           <Route exact path='/workspaces' component={Workspaces}/>
           <Route exact path='/navigation' component={Navigation}/>
           <Route exact path='/winner' component={Winner}/>
+          <Route component={S404}/>
         </Switch>
       </Router>
   );
