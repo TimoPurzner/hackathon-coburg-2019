@@ -14,8 +14,8 @@ class ReactComponent extends Component {
     return (
         <div className={'side_menu'}>
           <Grid>
-            <Grid.Column width={4}>
-              <Menu fluid vertical tabular>
+            <Grid.Column className={'side_menu__spalte'} width={4}>
+              <Menu fluid vertical tabular className={'side_menu__menu'}>
                 <Menu.Item
                     name='Dashboard'
                     active={path==='/dashboard'}
@@ -39,7 +39,7 @@ class ReactComponent extends Component {
               </Menu>
             </Grid.Column>
 
-            <Grid.Column stretched width={12}>
+            <Grid.Column width={12}>
 
               {this.props.content}
 

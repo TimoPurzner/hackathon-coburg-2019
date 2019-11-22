@@ -26,7 +26,7 @@ class Login extends Component {
                     placeholder='Password'
                     type='password'
                 />
-                <Button color='orange' fluid size='large'>
+                <Button color='orange' fluid size='large' onClick={()=>this.props.history.push('/dashboard')}>
                   Login
                 </Button>
               </Segment>

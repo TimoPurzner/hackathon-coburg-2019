@@ -33,7 +33,7 @@ class Index extends Component {
   render() {
     return (
         <Layout>
-          <div>Dashbaord</div>
+          <div>Dashboard</div>
 
         </Layout>
     )

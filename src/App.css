@@ -23,3 +23,15 @@
     margin-top: 10px;
     height: 100vh;
 }
+
+.side_menu__spalte{
+    min-height: 100vh;
+}
+
+.side_menu__menu{
+    min-height: 100vh!important;
+}
+
+.user_search__input{
+    width: 95%;
+}
