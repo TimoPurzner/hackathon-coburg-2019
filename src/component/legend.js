@@ -11,7 +11,7 @@ class ReactComponent extends Component {
     return (
         <div>
           <div>
-            <div style={{backgroundColor: '#330000'}} className={'legend__color'}/>
+            <div style={{backgroundColor: '#99CC99'}} className={'legend__color'}/>
             <div style={{display: 'inline', marginLeft: 5}} className={'legend_name'}>
               Arbeitsplatz frei
             </div>

@@ -33,7 +33,30 @@ class UserSearch extends Component {
       console.log('dropdown', dd);
 
       this.setState({dd:dd})
-    })
+    });
+
+    setTimeout(() => {
+      this.api.getWorkspaceAll().then(d => {
+        d = JSON.parse(d);
+        let work = d.workspaces;
+        work.forEach(w => {
+          let e = document.querySelector(`[id^="A${w.id}"]`);
+          if (w.occupied) {
+            e.style.fill = "gray";
+          } else if (w.reserved) {
+            e.style.fill = "blue";
+            setTimeout(() => {
+              this._event(null);
+            }, 16000);
+          } else {
+            // if free
+            if(e) e.style.fill = "#99CC99";
+          }
+        });
+
+      });
+    }, 2000);
+
 
   }
 
@@ -41,18 +64,24 @@ class UserSearch extends Component {
     let id=data.value;
     // find user
     let u=this.state.users.filter(x => x.id===id)[0];
-    console.log(u)
-
+    console.log(u);
+    let el = document.querySelector(`[id^=\"A${u.psid}\"]`);
+    let ocolor=el.style.fill;
+    console.log('FARBE?', ocolor);
+    el.style.fill = "#440044";
+    setTimeout(()=>{ el.style.fill = ocolor; }, 1000);
+    setTimeout(()=>{ el.style.fill = "#440044"; }, 2000);
+    setTimeout(()=>{ el.style.fill = ocolor; }, 3000);
   };
 
   render() {
     return (
-        <Layout cla>
+        <Layout>
           <Header as='h1'>Finde einen Arbeitskollegen</Header>
 
           <Dropdown
+              className='index__input'
               placeholder='Wenn suchst du?'
-              fluid
               search
               selection
               options={this.state.dd}

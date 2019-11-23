@@ -4,6 +4,7 @@ import Layout from "../component/layout";
 import ReactSVG from 'react-svg'
 import socketIOClient from "socket.io-client";
 import {Header} from 'semantic-ui-react'
+import Legend from "../component/legend";
 
 class Index extends Component {
 
@@ -23,38 +24,63 @@ class Index extends Component {
     websocket.onmessage = (evt) => {
       this._event(evt)
     };
+    // Update all workspaces every 2 sec
+    setTimeout(() => {
+      this.api.getWorkspaceAll().then(d => {
+        d = JSON.parse(d);
+        let work = d.workspaces;
+        work.forEach(w => {
+          let e = document.querySelector(`[id^="A${w.id}"]`);
+          if (w.occupied) {
+            e.style.fill = "gray";
+          } else if (w.reserved) {
+            e.style.fill = "blue";
+            setTimeout(() => {
+              this._event(null);
+            }, 16000);
+          } else {
+            // if free
+            if(e) e.style.fill = "#99CC99";
+          }
+        });
+
+      });
+    }, 2000);
+
   }
 
-  _event(evt){
+  _event(evt) {
     console.log('EVENT!!!', JSON.parse(evt.data));
     this.api.getWorkspace().then(d => {
-      d= JSON.parse(d);
+      d = JSON.parse(d);
       console.log("first API REQUEST!", d);
       let e = document.querySelector('[id^=\"A56308\"]');
-      console.log("occupied",d.occupied, d.reserved)
+      console.log("occupied", d.occupied, d.reserved);
 
-      if(d.occupied){
+      if (d.occupied) {
         console.log('AFSDFADSADFSADFSADFSADSFADFSADFSADFS')
         e.style.fill = "gray";
-      }else if(d.reserved){
+      } else if (d.reserved) {
         e.style.fill = "blue";
-        setTimeout(()=>{ this._event(evt); }, 16000);
-      }else{
-        e.style.fill = "#330000";
+        setTimeout(() => {
+          this._event(evt);
+        }, 16000);
+      } else {
+        // if free
+        e.style.fill = "#99CC99";
       }
       console.log("ELEMENT", e)
     });
   }
+
   render() {
     return (
         <Layout>
-          <div className={'index__svg'} >
+          <div className={'index__svg'}>
             <ReactSVG src="/images/arbeitsplatz.svg"/>
           </div>
 
-          <div className={'index__legende'}>
-
-          </div>
+          <Legend/>
 
         </Layout>
     )

@@ -1,4 +1,4 @@
 export const API_CONFIG = {
-  url: 'http://127.0.0.1:5000/',
+  url: 'https://hackathon-code-rush.herokuapp.com/',
   api_key:'HUK_Team4'
 };

@@ -36,6 +36,11 @@
     width: 95%;
 }
 
+.index__input{
+    width: 95%;
+    margin-bottom: 10px;
+}
+
 .index__svg{
     width: 95%;
 }

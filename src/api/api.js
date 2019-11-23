@@ -45,6 +45,10 @@ export default class API {
     return this.request('GET', 'workspace/56308')
   }
 
+  getWorkspaceAll(){
+    return this.request('GET', 'workspace/all')
+  }
+
   getUsers(){
     return this.request('GET', 'user/all')
   }
