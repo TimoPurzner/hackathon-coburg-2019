@@ -1,49 +1,69 @@
 import React, {Component} from 'react';
-import { Header, Input, Button, Card, Image  } from 'semantic-ui-react'
+import { Header, Input, Button, Card, Image, Dropdown  } from 'semantic-ui-react'
+import Legend from '../component/legend'
 
 import Layout from '../component/layout'
 import Api from '../api/api'
+import ReactSVG from "react-svg";
 
 class UserSearch extends Component {
 
   constructor(props) {
     super(props);
     this.state={
-      status: []
+      users: [],
+      dd: []
     };
     this.api=Api.getInstance();
+    // { key: 'af', value: 'af', flag: 'af', text: 'Afghanistan' }
 
-    let websocket = new WebSocket("wss://api.parking-pilot.com/parkinglots/1778/websocket?api_key=HUK_Team4");
-    websocket.onopen = (evt) => {
-      console.log('CONNECTED');
-    };
-    websocket.onmessage = (evt)=>{
-      console.log('EVENT!!!', JSON.parse(evt.data));
-      this.setState({status: evt.data})
-    };
+    this.api.getUsers().then(d=>{
+      d=JSON.parse(d);
+      let users=d.users;
+
+      //Remember users
+      this.setState({users: users});
+
+      console.log(users);
+      let dd=[];
+      // convert for dropdown
+      users.forEach(user => {
+        dd.push({key: user.id, value: user.id, text:user.name})
+      });
+      console.log('dropdown', dd);
+
+      this.setState({dd:dd})
+    })
+
   }
+
+  _magic=(e, data)=>{
+    let id=data.value;
+    // find user
+    let u=this.state.users.filter(x => x.id===id)[0];
+    console.log(u)
+
+  };
 
   render() {
     return (
         <Layout cla>
           <Header as='h1'>Finde einen Arbeitskollegen</Header>
-          <Input placeholder='Name des Kollegen' className={'user_search__input'} />
 
-          <Card>
-            <Card.Content>
-              <Image
-                  floated='right'
-                  size='mini'
-                  src='/images/steve.jpg'
-              />
-              <Card.Header>Steve Sanders</Card.Header>
-              <Card.Meta>Online seit 22.11.2019 8:05</Card.Meta>
-              <Card.Description>
-                Ist verfügbar: {}
-                Sitzt an: {}
-              </Card.Description>
-            </Card.Content>
-          </Card>
+          <Dropdown
+              placeholder='Wenn suchst du?'
+              fluid
+              search
+              selection
+              options={this.state.dd}
+              onChange={this._magic}
+          />
+
+
+          <div className={'index__svg'}>
+            <ReactSVG src="/images/arbeitsplatz.svg"/>
+          </div>
+          <Legend />
 
         </Layout>
     )

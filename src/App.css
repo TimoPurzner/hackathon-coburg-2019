@@ -35,3 +35,13 @@
 .user_search__input{
     width: 95%;
 }
+
+.index__svg{
+    width: 95%;
+}
+
+.legend__color{
+    display: inline-block;
+    width: 60px;
+    height: 15px;
+}

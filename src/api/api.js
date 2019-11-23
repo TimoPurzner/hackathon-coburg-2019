@@ -41,6 +41,14 @@ export default class API {
     return this.request('GET', 'parkinglots')
   }
 
+  getWorkspace(){
+    return this.request('GET', 'workspace/56308')
+  }
+
+  getUsers(){
+    return this.request('GET', 'user/all')
+  }
+
 
   async request(type, url, data = null, content_type="application/json; charset=utf-8") {
 
