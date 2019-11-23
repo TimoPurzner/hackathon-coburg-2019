@@ -27,7 +27,7 @@ class ReactComponent extends Component {
                     onClick={()=>this.props.history.push('/userSearch')}
                 />
                 <Menu.Item
-                    name='Arbeitsplätze'
+                    name='Reservierung'
                     active={path==='/workspaces'}
                     onClick={()=>this.props.history.push('/workspaces')}
                 />

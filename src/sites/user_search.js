@@ -68,10 +68,14 @@ class UserSearch extends Component {
     let el = document.querySelector(`[id^=\"A${u.psid}\"]`);
     let ocolor=el.style.fill;
     console.log('FARBE?', ocolor);
-    el.style.fill = "#440044";
+    el.style.fill = "#EB1ADD";
     setTimeout(()=>{ el.style.fill = ocolor; }, 1000);
-    setTimeout(()=>{ el.style.fill = "#440044"; }, 2000);
+    setTimeout(()=>{ el.style.fill = "#EB1ADD"; }, 2000);
     setTimeout(()=>{ el.style.fill = ocolor; }, 3000);
+    setTimeout(()=>{ el.style.fill = "#EB1ADD"; }, 4000);
+    setTimeout(()=>{ el.style.fill = ocolor; }, 5000);
+    setTimeout(()=>{ el.style.fill = "#EB1ADD"; }, 6000);
+    setTimeout(()=>{ el.style.fill = ocolor; }, 7000);
   };
 
   render() {

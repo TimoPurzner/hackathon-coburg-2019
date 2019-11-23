@@ -50,7 +50,7 @@ class Index extends Component {
   }
 
   _event(evt) {
-    console.log('EVENT!!!', JSON.parse(evt.data));
+    //console.log('EVENT!!!', JSON.parse(evt.data));
     this.api.getWorkspace().then(d => {
       d = JSON.parse(d);
       console.log("first API REQUEST!", d);

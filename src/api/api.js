@@ -11,7 +11,7 @@ export default class API {
     }
 
     this.url = API_CONFIG.url;
-    this.token= API_CONFIG.api_key;
+    this.token = API_CONFIG.api_key;
 
   }
 
@@ -33,28 +33,40 @@ export default class API {
     return this.request('GET', `controller/${id}/sensor`)
   }
 
-  getSvg(id){
-    return this.request('GET', `parkinglots/${id}/svg`, null,"application/xml")
+  getSvg(id) {
+    return this.request('GET', `parkinglots/${id}/svg`, null, "application/xml")
   }
 
-  getParkingSlots(){
+  getParkingSlots() {
     return this.request('GET', 'parkinglots')
   }
 
-  getWorkspace(){
+  getWorkspace() {
     return this.request('GET', 'workspace/56308')
   }
 
-  getWorkspaceAll(){
+  getWorkspaceAll() {
     return this.request('GET', 'workspace/all')
   }
 
-  getUsers(){
+  getUsers() {
     return this.request('GET', 'user/all')
   }
 
+  createResvervation(workspace_id, duration) {
+    let start = parseInt(new Date().getTime() / 1000);
+    let end = parseInt(start + 3600 * duration);
 
-  async request(type, url, data = null, content_type="application/json; charset=utf-8") {
+    return this.request('POST', 'calendar', JSON.stringify({
+      "workspace_id": workspace_id,
+      "user_id": 1,
+      "effective_from": start,
+      "effective_to": end
+    }))
+  }
+
+
+  async request(type, url, data = null, content_type = "application/json; charset=utf-8") {
 
     return new Promise((resolve, reject) => {
 
@@ -70,8 +82,7 @@ export default class API {
         if (xhttp.status === 401) {
           //If the action is not refreshing the token
           reject({error: 'unauthorized', msg: 'Session abgelaufen, bitte melde dich neu an', response: xhttp})
-        }
-        else {
+        } else {
           // Otherwise reject with the status text
           reject(xhttp.response);
         }
@@ -82,10 +93,7 @@ export default class API {
         reject({error: "network_error", msg: 'Prüfe deine Netzwerk verbindung'});
       };
 
-      xhttp.open(type, this.url+url+`?api_key=${this.token}`, true);
-
-      console.log(this.url+url+`?api_key=${this.token}`);
-      console.log(this.token);
+      xhttp.open(type, this.url + url, true);
 
       xhttp.setRequestHeader('Content-Type', content_type);
       //xhttp.setRequestHeader('X-Auth-Token', this.token);

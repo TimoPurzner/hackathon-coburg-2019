@@ -14,7 +14,7 @@ class Head extends Component {
         <div className='header'>
           <Image src='/images/logo.svg' size='tiny' floated='left'/>
           <div className='header__name'>
-            <Header centered as='h2'>Smart Workspaces</Header>
+            <Header centered={'true'} as='h2'>Smart Workspaces</Header>
           </div>
         </div>
 

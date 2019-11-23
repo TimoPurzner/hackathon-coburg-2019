@@ -50,3 +50,12 @@
     width: 60px;
     height: 15px;
 }
+
+.workspaces__input{
+    width: 95%;
+    margin-bottom: 10px;
+}
+
+.workspaces__button{
+    margin-right: 20px !important;
+}

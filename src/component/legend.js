@@ -19,13 +19,13 @@ class ReactComponent extends Component {
           <div>
             <div style={{backgroundColor: 'gray'}} className={'legend__color'}/>
             <div style={{display: 'inline', marginLeft: 5}} className={'legend_name'}>
-              Arbeitsplatz Besetzt
+              Arbeitsplatz besetzt
             </div>
           </div>
           <div>
             <div style={{backgroundColor: 'blue'}} className={'legend__color'}/>
             <div style={{display: 'inline', marginLeft: 5}} className={'legend_name'}>
-              Arbeitsplatz Reserviert
+              Arbeitsplatz reserviert
             </div>
           </div>
           <div>
