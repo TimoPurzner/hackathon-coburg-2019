@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Dropdown, Header, Input} from 'semantic-ui-react'
+import {Button, Dropdown, Header, Input, Message, Icon} from 'semantic-ui-react'
 
 import Layout from '../component/layout'
 import Api from '../api/api'
@@ -11,7 +11,9 @@ class Workspaces extends Component {
     super(props);
     this.state = {
       dd: [],
-      sp: []
+      sp: [],
+      loading: false,
+      finished: false
     };
     this.api = Api.getInstance();
 
@@ -37,7 +39,30 @@ class Workspaces extends Component {
     this.id = "";
     this.duration= 0;
 
+    setTimeout(() => {
+      this.api.getWorkspaceAll().then(d => {
+        d = JSON.parse(d);
+        let work = d.workspaces;
+        work.forEach(w => {
+          let e = document.querySelector(`[id^="A${w.id}"]`);
+          if (w.occupied) {
+            e.style.fill = "gray";
+          } else if (w.reserved) {
+            e.style.fill = "blue";
+            setTimeout(() => {
+              this._event(null);
+            }, 16000);
+          } else {
+            // if free
+            if(e) e.style.fill = "#99CC99";
+          }
+        });
+
+      });
+    }, 2000);
+
   }
+
 
   _magic = (e, data) => {
     //reset old element
@@ -53,8 +78,34 @@ class Workspaces extends Component {
 
   };
 
+  _event=(evt) =>{
+    //console.log('EVENT!!!', JSON.parse(evt.data));
+    this.api.getWorkspace().then(d => {
+      d = JSON.parse(d);
+      console.log("first API REQUEST!", d);
+      let e = document.querySelector('[id^=\"A56308\"]');
+      console.log("occupied", d.occupied, d.reserved);
+
+      if (d.occupied) {
+        console.log('AFSDFADSADFSADFSADFSADSFADFSADFSADFS')
+        e.style.fill = "gray";
+      } else if (d.reserved) {
+        e.style.fill = "blue";
+        setTimeout(() => {
+          this._event(evt);
+        }, 16000);
+      } else {
+        // if free
+        e.style.fill = "#99CC99";
+      }
+      console.log("ELEMENT", e)
+    });
+  }
+
   _res = () => {
-    this.api.createResvervation(this.id,this.duration).catch(e =>{
+    this.setState({loading: true, finished: false});
+    this.api.createResvervation(this.id,this.duration).then(e =>{
+      this.setState({loading: false, finished: true});
       console.log(e)
     })
   };
@@ -85,6 +136,24 @@ class Workspaces extends Component {
           /> <Button className={'workspaces__button'} positive floated={'right'}
                      onClick={this._res}>Reservieren!</Button>
           </div>
+          {this.state.loading &&
+          <Message icon>
+            <Icon name='circle notched' loading/>
+            <Message.Content>
+              <Message.Header>Raum wird Reserviert</Message.Header>
+              Die Umpalumpas Arbeiten
+            </Message.Content>
+          </Message>
+          }
+          {this.state.finished &&
+          <Message positive>
+            <Message.Header>Der Platz wurde für dich Reserviert</Message.Header>
+            <p>
+              Schnapp dir deinen Platz in den nächsten <b>10 Minuten!</b>
+            </p>
+          </Message>
+          }
+
         </Layout>
     )
   }

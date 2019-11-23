@@ -78,6 +78,30 @@ class UserSearch extends Component {
     setTimeout(()=>{ el.style.fill = ocolor; }, 7000);
   };
 
+  _event=(evt) =>{
+    //console.log('EVENT!!!', JSON.parse(evt.data));
+    this.api.getWorkspace().then(d => {
+      d = JSON.parse(d);
+      console.log("first API REQUEST!", d);
+      let e = document.querySelector('[id^=\"A56308\"]');
+      console.log("occupied", d.occupied, d.reserved);
+
+      if (d.occupied) {
+        console.log('AFSDFADSADFSADFSADFSADSFADFSADFSADFS')
+        e.style.fill = "gray";
+      } else if (d.reserved) {
+        e.style.fill = "blue";
+        setTimeout(() => {
+          this._event(evt);
+        }, 16000);
+      } else {
+        // if free
+        e.style.fill = "#99CC99";
+      }
+      console.log("ELEMENT", e)
+    });
+  }
+
   render() {
     return (
         <Layout>
