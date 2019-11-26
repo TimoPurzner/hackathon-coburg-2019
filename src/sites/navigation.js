@@ -16,7 +16,7 @@ class Navigation extends Component {
   render() {
     return (
         <Layout>
-          <div>Navigation</div>
+          <Header as='h1'>Navigation</Header>
 
         </Layout>
     )

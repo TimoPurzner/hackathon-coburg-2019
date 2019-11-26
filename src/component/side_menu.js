@@ -36,6 +36,11 @@ class ReactComponent extends Component {
                     active={path==='/navigation'}
                     onClick={()=>this.props.history.push('/navigation')}
                 />
+                <Menu.Item
+                    name='Use Cases'
+                    active={path==='/useCases'}
+                    onClick={()=>this.props.history.push('/useCases')}
+                />
               </Menu>
             </Grid.Column>
 

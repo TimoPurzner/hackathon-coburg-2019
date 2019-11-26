@@ -12,6 +12,7 @@ import Index from './sites/index'
 import Workspaces from './sites/workspaces'
 import UserSearch from './sites/user_search'
 import Navigation from './sites/navigation'
+import UseCases from './sites/use_cases'
 import S404 from './sites/s404'
 import Api from './api/api'
 
@@ -27,6 +28,7 @@ function App() {
           <Route exact path='/workspaces' component={Workspaces}/>
           <Route exact path='/navigation' component={Navigation}/>
           <Route exact path='/winner' component={Winner}/>
+          <Route exact path='/useCases' component={UseCases}/>
           <Route component={S404}/>
         </Switch>
       </Router>
